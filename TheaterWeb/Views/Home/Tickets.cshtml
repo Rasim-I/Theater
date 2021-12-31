@@ -1,0 +1,59 @@
+﻿@using TheaterLogic.Models.Enum
+@model IEnumerable<TheaterLogic.Models.Ticket>
+
+@{
+    ViewData["Title"] = "Tickets";
+}
+
+<div class="main">
+
+
+    @using (Html.BeginForm("UserTickets", "Home", FormMethod.Post))
+    {
+        <input type="text" name="customerName" />
+        <button style="display: inline" type="submit">Submit</button><br/><br/>
+    }
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.State)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Owner)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Owner)
+                    </td>
+                    <td>
+                        @if (item.State == State.Reserved)
+                        {
+                            @Html.ActionLink("Buy", "BuyReserved", new { id=item.Id})
+                        }
+                        |
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</div>

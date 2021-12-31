@@ -1,0 +1,62 @@
+﻿@using TheaterWeb.Models.Enum
+
+@{
+    ViewData["Title"] = "BuyTicket";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<head>
+    <link href="~/css/BuyTicket.css" rel="stylesheet" />
+</head>
+
+<div class="main">
+
+    <div class="showPresentation">
+        <div class="showBox shadow">
+            <label class="label-info">You are on the page of buying tickets for the show:<br/>
+                @ViewBag.Show.Name <br/>
+                Genre: @ViewBag.Show.Genre<br/>
+                Author: @ViewBag.Show.Author.Name @ViewBag.Show.Author.Surname<br/>
+                Show date: @ViewBag.Show.ShowTime.ToShortDateString() @ViewBag.Show.ShowTime.ToShortTimeString()<br/>
+                Ticket price:<br/>
+                Vip - @ViewBag.VipTicketPrice, Common - @ViewBag.CommonTicketPrice, Budget - @ViewBag.BudgetTicketPrice
+            </label><br/>
+        </div>
+    </div>
+    
+    
+    
+
+    <div class="ticketOptions">
+        
+        <form method="post">
+            <input type="hidden" value="@ViewBag.Show.Id" name="ShowId" />
+            <input type="text" placeholder="Your name" name="CustomerName"><br />
+
+            <select class="ticketTypeSelect" name="TicketType">
+                <option value="@PlaceType.Vip">Vip ticket</option>
+                <option value="@PlaceType.Common">Common ticket</option>
+                <option value="@PlaceType.Budget">Budget ticket</option>
+            </select>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="TicketAction" value="@TicketAction.Buy" id="Buy">
+                <label class="form-check-label" for="Buy">
+                    Buy
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="TicketAction" value="@TicketAction.Reserve" id="Reserve" checked>
+                <label class="form-check-label" for="Reserve">
+                    Reserve
+                </label>
+            </div><br />
+
+            <input type="submit" class="btn-primary" value="Submit">
+        </form>
+
+    </div>
+
+
+</div>

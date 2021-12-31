@@ -1,0 +1,115 @@
+﻿body {
+    position: relative;
+    height: 100%;
+
+    .wrapper {
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.main {
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.searchContainer {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 30px;
+}
+
+.radio-opt {
+    margin-top: 20px;
+    margin-left: 15px;
+}
+
+
+
+
+#showContainer {
+    margin-right: auto;
+    margin-left: auto;
+    width: 500px;
+    height: fit-content;
+    flex-grow: 1;
+}
+
+.show {
+    position: relative;
+    width: 500px;
+    height: 300px;
+    overflow: hidden; //???
+    border: #0a53be 2px solid;
+    //margin-left: auto;
+    //margin-right: auto;
+    margin-top: 50px;
+    padding: 40px;
+    display: inline-block;
+    background-image: url("img/theaterpicture.png");
+
+    .show-info {
+        margin-left: 100px;
+        margin-top: 45px;
+
+        .show-text {
+            font-family: Georgia;
+            font-size: 18px;
+            color: white;
+        }
+
+        .btn-show-tickets {
+            margin-top: 10px;
+        }
+    }
+}
+
+//@import "footer.scss";
+
+
+$footerHeight: 90px;
+$footerColor: #ffac37;
+$cloudImageWidth: 70px;
+$color: black;
+
+@mixin font() {
+    font-size: 19px;
+    font-family: "Fira Code";
+}
+
+footer {
+    height: $footerHeight;
+    background-color: $footerColor;
+
+    #cloud_image {
+        width: $cloudImageWidth;
+        display: inline;
+        position: relative;
+        margin: 15px;
+        left: 200px;
+    }
+
+    #rights {
+        display: inline;
+        position: relative;
+        left: 200px;
+        color: $color;
+        @include font();
+    }
+
+    #contact_mail {
+        color: blue;
+        @include font();
+        margin-top: 35px;
+        margin-right: 80px;
+        float: right;
+        background: none;
+
+        &:hover {
+            color: $color;
+        }
+    }
+}
+

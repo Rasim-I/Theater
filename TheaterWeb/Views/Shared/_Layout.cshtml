@@ -1,0 +1,74 @@
+﻿@using TheaterWeb.Controllers
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TheaterWeb</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="@Url.Content("~/css/theater.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/lib/bootstrap/dist/css/bootstrap.min.css")" rel="stylesheet">
+    
+</head>
+<body>
+<div class="wrapper">
+    
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/Home/Index">Theater</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/Home/Authors">Authors</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Tickets">Tickets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Privacy">Pricing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Admin/Index"><img onc src="css/img/profile.png" style="width: 50px; position: absolute; left: 97%;
+                                                                                      top: 6px"/></a>
+                        </li>
+                    </ul>
+                    <span class="navbar-text">
+
+                    </span>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+
+
+        @RenderBody()
+
+    
+    
+    <footer class="footer">
+        <img id="cloud_image" src="css/img/cloud.png">
+
+        <div id="rights"><label id ="year"></label> &copy;
+            <script>
+                var current_year = new Date();
+                document.getElementById("year").innerHTML = current_year.getFullYear().toString();
+            </script>
+        </div>
+
+        <a id="contact_mail" href="mailto:test@example.com">Contact us</a>
+    </footer>
+</div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

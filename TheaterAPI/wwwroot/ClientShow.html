@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a style="margin-right: 30px" href="ClientAuthor.html">To Authors</a>
+            <a href="ClientTicket.html">To Tickets</a>
+        </nav>
+    </header>
+
+    <main style="text-align: center">
+
+        <div id="searchForShowByParams">
+            <h2>Search for show by name, genre, date or author:</h2>
+            <input id="name" placeholder="show name" type="text"><br />
+            <input id="genre" placeholder="show genre" type="text"><br />
+            <input id="showTime" placeholder="date" type="date"><br />
+            <input id="authorId" placeholder="authorId" type="text"><br />
+            <button onclick="GetShows()" id="btn_searchByParams" type="submit">Search</button>
+        </div>
+
+        <div id="searchForShowById">
+            <h2>Search for show by Id:</h2>
+            <input id="showId_search" type="text" placeholder="showId">
+            <button onclick="GetShow(showId_search.value)" id="btn_searchById" type="submit">Search</button>
+        </div>
+
+
+        <div id="showList" style="margin-bottom: 200px; margin-top: 50px">
+
+            <table id="showListTable" style="margin-left: auto; margin-right: auto">
+                
+
+
+            </table>
+
+        </div>
+
+
+        <div id="deleteShow">
+            <h2>Delete show by Id:</h2>
+            <input id="showIdToDelete" type="text" placeholder="showId">
+            <button onclick="DeleteShow()" type="submit">Delete</button>
+        </div>
+
+
+        <div id="createShow">
+            <h2>Create show</h2>
+            <input id="Id_create" type="text" placeholder="Id"><br />
+            <input id="Name_create" type="text" placeholder="Name"><br />
+            <input id="ShowTime_create" type="date" placeholder="ShowTime"><br />
+            <input id="Genre_create" type="text" placeholder="Genre"><br />
+            <input id="AuthorId_create" type="text" placeholder="AuthorId"><br />
+
+            <input id="vipTicketQuantity" type="number" placeholder="vip ticket quantity"><br />
+            <input id="commonTicketQuantity" type="number" placeholder="common ticket quantity"><br />
+            <input id="budgetTicketQuantity" type="number" placeholder="budget ticket quantity"><br />
+
+            <button onclick="CreateShow()" type="submit">Create</button>
+        </div>
+
+    </main>
+
+
+
+    <script>
+
+        async function CreateShow() {
+
+            let id = document.getElementById("Id_create").value;
+            let name = document.getElementById("Name_create").value;
+            let showTime = '2021-12-30T13:17:48.224Z' ;//document.getElementById("ShowTime_create").value;
+            let genre = document.getElementById("Genre_create").value;
+            let authorId = document.getElementById("AuthorId_create").value;
+            let vipTickets = document.getElementById("vipTicketQuantity").value;
+            let commonTickets = document.getElementById("commonTicketQuantity").value;
+            let budgetTickets = document.getElementById("budgetTicketQuantity").value;
+
+            let showParams = {
+                id: id,
+                name: name,
+                showTime: showTime,
+                genre: parseInt(genre),
+                authorId: authorId,
+                vipTicketsQuantity: parseInt(vipTickets),
+                commonTicketsQuantity: parseInt(commonTickets),
+                budgetTicketsQuantity: parseInt(budgetTickets)
+            };
+
+            //document.body.append(JSON.stringify(test2));
+            document.body.append(JSON.stringify(showParams));
+
+            const response = await fetch("/api/shows", {
+                method: "POST",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: JSON.stringify(showParams)
+
+            });
+            
+            if (response.ok === true) {
+                alert("Show created");
+            } else
+                alert("Something went wrong " + response.status + " " + response.statusText);
+
+
+        }
+
+
+        async function GetShow(showId) {
+
+            let showList = document.getElementById("showListTable");
+            showList.innerHTML = "<tr><th>Id</th><th>Name</th><th>Date</th><th>Genre</th><th>Author Id</th></tr>";
+
+            const response = await fetch("/api/shows/" + showId, {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                const show = await response.json();
+                showList.append(row(show));
+            }
+        }
+
+        async function GetShows() {
+
+            let showList = document.getElementById("showListTable");
+            showList.innerHTML = "<tr><th>Id</th><th>Name</th><th>Date</th><th>Genre</th><th>Author Id</th></tr>";
+
+            let name = document.getElementById("name").value;
+            let genre = document.getElementById("genre").value;
+            let showTime = document.getElementById("showTime").value;
+            let authorId = document.getElementById("authorId").value;
+            //document.body.append("data from FORM " + name + " " + genre + " " + showTime + " " + authorId + " ");
+
+            let request = "/api/shows?";
+            if (name != "")
+                request += "ShowName=" + name + "&";
+            if (genre != "")
+                request += "Genre=" + genre + "&";
+            if (showTime != "")
+                request += "ShowTime=" + showTime + "&";
+            if (authorId != "")
+                request += "AuthorId=" + authorId + "&";
+
+
+
+            const response = await fetch(request, {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                const shows = await response.json();
+
+                shows.forEach(show => {
+                    showList.append(row(show))
+                    //document.body.append("show one");
+                });
+            }
+        }
+
+        function row(show) {
+
+            const tr = document.createElement("tr");
+            tr.setAttribute("data-rowid", show.id);
+
+            const idTd = document.createElement("td");
+            idTd.append(show.id);
+            tr.append(idTd);
+
+            const nameTd = document.createElement("td");
+            nameTd.append(show.name);
+            tr.append(nameTd);
+
+            const dateTd = document.createElement("td");
+            dateTd.append(show.showTime);
+            tr.append(dateTd);
+
+            const genreTd = document.createElement("td");
+            genreTd.append(show.genre);
+            tr.append(genreTd);
+
+            const authorTd = document.createElement("td");
+            authorTd.append(show.author.id);
+            tr.append(authorTd);
+
+            return tr;
+        }
+
+
+        async function DeleteShow() {
+
+            let showId = document.getElementById("showIdToDelete").value;
+
+            const response = await fetch("/api/shows/" + showId, {
+                method: "DELETE",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                alert("Deleted successfully");
+            } else
+                alert("Something wrong  " + response.status + " " + response.statusText);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        GetShows();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+</body>
+</html>

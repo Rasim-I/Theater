@@ -1,0 +1,44 @@
+﻿
+$footerHeight: 90px;
+$footerColor: #ffac37;
+$cloudImageWidth: 70px;
+$color: black;
+
+@mixin font() {
+    font-size: 19px;
+    font-family: "Fira Code";
+}
+
+footer {
+    height: $footerHeight;
+    background-color: $footerColor;
+
+    #cloud_image {
+        width: $cloudImageWidth;
+        display: inline;
+        position: relative;
+        margin: 15px;
+        left: 200px;
+    }
+
+    #rights {
+        display: inline;
+        position: relative;
+        left: 200px;
+        color: $color;
+        @include font();
+    }
+
+    #contact_mail {
+        color: blue;
+        @include font();
+        margin-top: 35px;
+        margin-right: 80px;
+        float: right;
+        background: none;
+
+        &:hover {
+            color: $color;
+        }
+    }
+}

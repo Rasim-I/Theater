@@ -1,0 +1,95 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="@Url.Content("~/lib/bootstrap/dist/css/bootstrap.min.css")" rel="stylesheet">
+    <link href="~/css/theater.css" rel="stylesheet" />
+</head>
+
+<div class="main">
+
+    <div class="searchContainer">
+        <div class="container-fluid">
+            @using (Html.BeginForm("SearchByShowName", "Home", FormMethod.Get, new { @class = "d-flex" }))
+            {
+                <input class="form-control" type="search" name="showName" placeholder="Show Name" aria-label="Search">
+                <button class="btn btn-primary" type="submit">Search</button>
+            }
+        </div>
+
+
+        @using (Html.BeginForm("SearchByProperties", "Home", FormMethod.Post))
+        {
+            <div class="radio-opt">
+
+                <label class="radio-opt-label">Choose date:</label>
+                <br />
+                <input name="ShowTime" type="date">
+                <br />
+                <label class="radio-opt-label">Choose a genre: </label>
+                @foreach (var genre in ViewBag.Genres)
+                {
+
+                    <div class="form-check-genre">
+                        <input class="form-check-input" type="radio" value="@genre" name="Genre" id="@genre">
+                        <label class="form-check-label" for="@genre">
+                            @genre
+                        </label>
+                    </div>
+
+                }
+                <br />
+
+                <label class="radio-opt-label">Choose author: </label>
+                @foreach (var author in ViewBag.Authors)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="AuthorId" value="@author.Id" id="@author.Id">
+                        <label class="form-check-label" for="@author.Id">
+                            @author.Name @author.Surname
+                        </label>
+                    </div>
+                }
+            </div>
+            <button class="btn btn-primary submit-btn" type="submit">Submit</button>
+        }
+
+
+
+
+
+    </div>
+
+    <div id="showContainer">
+        
+        @foreach (var show in ViewBag.Shows)
+        {
+            <div class="show">
+                <div class="show-info">
+                    <label class="show-text">@show.Name</label><br />
+                    <label class="show-text">Author: @show.Author.Name @show.Author.Surname</label><br />
+                    <label class="show-text">Genre: @show.Genre</label><br />
+                    <label class="show-text">Will be shown on @show.ShowTime.ToShortDateString() @show.ShowTime.ToShortTimeString()</label><br />
+
+                    @using (Html.BeginForm("BuyTicket", "Home", new { Id = show.Id }, FormMethod.Get))
+                    {
+                        <input type="submit" value="Go to tickets" class="btn-show-tickets">
+                    }
+
+                </div>
+            </div>
+        }
+
+
+
+    </div>
+
+
+</div>
+
+
+

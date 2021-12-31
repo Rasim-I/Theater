@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Author</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a style="margin-right: 30px" href="ClientShow.html">To Shows</a>
+            <a href="ClientTicket.html">To Tickets</a>
+        </nav>
+    </header>
+    <main style="text-align: center">
+
+        <div id="searchForAuthor">
+            <h2>Search for author by Id:</h2>
+            <input id="authorId" type="text" placeholder="Author Id">
+            <button onclick="GetAuthor(authorId.value)">Search</button><br /><br />
+
+            <h2>Search for author by name/surname:</h2>
+            <input id="authorName" type="text" placeholder="Name">
+            <button onclick="GetAuthors()">Search</button>
+
+        </div>
+
+        <div id="authorList" style="margin-bottom: 200px; margin-top: 20px">
+            <table id="authorListTable" style="margin-left: auto; margin-right: auto">
+
+
+            </table>
+        </div>
+
+
+
+
+        <div id="createAuthor">
+            <h2>Create author</h2>
+
+            <input id="authorId_create" type="text" placeholder="Id"><br />
+            <input id="authorName_create" type="text" placeholder="Name"><br />
+            <input id="surname" type="text" placeholder="Surname"><br />
+            <input id="phoneNumber" type="text" placeholder="Phone number"><br />
+            <button onclick="CreateAuthor()" type="submit">Create</button>
+        </div>
+
+    </main>
+
+
+
+    <script>
+
+        async function CreateAuthor() {
+
+            let id = document.getElementById("authorId_create").value;
+            let name = document.getElementById("authorName_create").value;
+            let surname = document.getElementById("surname").value;
+            let phoneNumber = document.getElementById("phoneNumber").value;
+
+            let authorParams = {
+                id: id,
+                name: name,
+                surname: surname,
+                phoneNumber: parseInt(phoneNumber)
+            };
+
+            const response = await fetch("/api/authors", {
+                method: "POST",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: JSON.stringify(authorParams)
+
+            });
+            if (response.ok === true) {
+                alert("Author created");
+            } else
+                alert("Something went wrong " + response.status + " " + response.statusText);
+        }
+
+
+
+
+        async function GetAuthor(authorId) {
+
+            let authorList = document.getElementById("authorListTable");
+            authorList.innerHTML = "<tr><th>Id</th><th>Name</th><th>Surname</th><th>Phone</th></tr>";
+
+            const response = await fetch("/api/authors/" + authorId, {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                const author = await response.json();
+                authorList.append(row(author));
+            }
+        }
+
+
+        async function GetAuthors() {
+
+            let authorList = document.getElementById("authorListTable");
+            authorList.innerHTML = "<tr><th>Id</th><th>Name</th><th>Surname</th><th>Phone</th></tr>";
+
+            let request = "/api/authors?";
+            let authorName = document.getElementById("authorName").value;
+            if (authorName != "")
+                request += "authorName=" + authorName;
+            else
+                request += "authorName=All";
+
+            const response = await fetch(request, {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                const authors = await response.json();
+                authors.forEach(author => {
+                    authorList.append(row(author))
+                });
+            }
+        }
+
+
+        function row(author) {
+
+            const tr = document.createElement("tr");
+            tr.setAttribute("data-rowid", author.id);
+
+            const idTd = document.createElement("td");
+            idTd.append(author.id);
+            tr.append(idTd);
+
+            const nameTd = document.createElement("td");
+            nameTd.append(author.name);
+            tr.append(nameTd);
+
+            const snameTd = document.createElement("td");
+            snameTd.append(author.surname);
+            tr.append(snameTd);
+
+            const numberTd = document.createElement("td");
+            numberTd.append(author.phoneNumber);
+            tr.append(numberTd);
+
+            return tr;
+        }
+
+
+        GetAuthors();
+
+    </script>
+
+
+
+</body>
+</html>

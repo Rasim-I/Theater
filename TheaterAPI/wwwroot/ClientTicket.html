@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a style="margin-right: 30px" href="ClientAuthor.html">To Authors</a>
+            <a href="ClientShow.html">To Tickets</a>
+        </nav>
+    </header>
+
+    <main style="text-align: center">
+
+        <div id="searchForTicket">
+            <h2>Search for ticket by Id:</h2>
+            <input id="ticketId" type="text" placeholder="Ticket Id">
+            <button onclick="GetTicket(ticketId.value)">Search</button><br /><br />
+
+            <h2>Search for tickets by owner:</h2>
+            <input id="ownerName" type="text" placeholder="Name">
+            <button onclick="GetTicketsByOwnerName(ownerName.value)">Search</button>
+
+            <h2>Search tickets by show Id:</h2>
+            <input id="showId" type="text" placeholder="Show Id">
+            <button onclick="GetTicketsByShowId(showId.value)">Search</button>
+        </div>
+
+        <div id="ticketList" style="margin-bottom: 200px; margin-top: 20px">
+            <table id="ticketListTable" style="margin-left: auto; margin-right: auto">
+
+
+
+            </table>
+        </div>
+
+        <div id="ticketActions">
+
+            <h2>Reserve ticket</h2>
+            <input id="ticketId_reserve" type="text" placeholder="Ticket Id"><br/>
+            <input id="owner_reserve" type="text" placeholder="Your name"><br/>
+            <button onclick="ReserveTicket(ticketId_reserve.value, owner_reserve.value)" type="submit">Reserve</button>
+
+            <h2>Buy ticket</h2>
+            <input id="ticketId_buy" type="text" placeholder="Ticket Id"><br/>
+            <input id="owner_buy" type="text" placeholder="Your name"><br/>
+            <button onclick="BuyTicket(ticketId_buy.value, owner_buy.value)" type="submit">Buy</button>
+
+        </div>
+
+
+
+    </main>
+
+    <script>
+
+        async function GetTicketsByOwnerName(owner) {
+
+            let ticketList = document.getElementById("ticketListTable");
+            ticketList.innerHTML = "<tr><th>Id</th><th>Owner</th><th>State</th><th>Price</th><th>ShowId</th></tr>";
+
+            const response = await fetch("/api/tickets/owner/" + owner, {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                const tickets = await response.json();
+                tickets.forEach(ticket => {
+                    ticketList.append(row(ticket))
+                });
+            }
+        }
+
+        async function ReserveTicket(ticketId, owner) {
+
+            let ticketParams = {
+                id: ticketId,
+                owner: owner
+            };
+
+            const response = await fetch("/api/tickets/reserve", {
+                method: "PATCH",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: JSON.stringify(ticketParams)
+
+            });
+            if (response.ok === true) {
+                alert("Ticket reserved");
+            } else
+                alert("Something went wrong " + response.status + " " + response.statusText);
+
+        }
+
+        async function BuyTicket(ticketId, owner) {
+
+            let ticketParams = {
+                id: ticketId,
+                owner: owner
+            };
+
+            const response = await fetch("/api/tickets/buy", {
+                method: "PATCH",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: JSON.stringify(ticketParams)
+
+            });
+            if (response.ok === true) {
+                alert("Ticket bought");
+            } else
+                alert("Something went wrong " + response.status + " " + response.statusText);
+
+        }
+
+
+
+
+
+        async function GetTicketsByShowId(showId) {
+
+            let ticketList = document.getElementById("ticketListTable");
+            ticketList.innerHTML = "<tr><th>Id</th><th>Owner</th><th>State</th><th>Price</th><th>ShowId</th></tr>";
+
+            const response = await fetch("/api/tickets/show/" + showId, {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                const tickets = await response.json();
+                tickets.forEach(ticket => {
+                    ticketList.append(row(ticket))
+                });
+            }      
+        }
+
+
+        async function GetTicket(ticketId) {
+
+            let ticketList = document.getElementById("ticketListTable");
+            ticketList.innerHTML = "<tr><th>Id</th><th>Owner</th><th>State</th><th>Price</th><th>ShowId</th></tr>";
+
+            const response = await fetch("/api/tickets/" + ticketId, {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+            });
+            if (response.ok === true) {
+                const ticket = await response.json();
+                ticketList.append(row(ticket));
+            }
+        }
+
+
+
+        function row(ticket) {
+
+            const tr = document.createElement("tr");
+            tr.setAttribute("data-rowid", ticket.id);
+
+            const idTd = document.createElement("td");
+            idTd.append(ticket.id);
+            tr.append(idTd);
+
+            const ownerTd = document.createElement("td");
+            ownerTd.append(ticket.owner);
+            tr.append(ownerTd);
+
+            const stateTd = document.createElement("td");
+            stateTd.append(ticket.state);
+            tr.append(stateTd);
+
+            const priceTd = document.createElement("td");
+            priceTd.append(ticket.price);
+            tr.append(priceTd);
+
+            const showIdTd = document.createElement("td");
+            showIdTd.append(ticket.showId);
+            tr.append(showIdTd);
+
+            return tr;
+        }
+
+
+
+
+
+
+    </script>
+
+
+
+
+</body>
+</html>

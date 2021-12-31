@@ -1,0 +1,16 @@
+C:\Users\rasim\source\repos\TheaterDAL\bin\Debug\netcoreapp3.1\TheaterDAL.deps.json
+C:\Users\rasim\source\repos\TheaterDAL\bin\Debug\netcoreapp3.1\TheaterDAL.runtimeconfig.json
+C:\Users\rasim\source\repos\TheaterDAL\bin\Debug\netcoreapp3.1\TheaterDAL.runtimeconfig.dev.json
+C:\Users\rasim\source\repos\TheaterDAL\bin\Debug\netcoreapp3.1\TheaterDAL.dll
+C:\Users\rasim\source\repos\TheaterDAL\bin\Debug\netcoreapp3.1\TheaterDAL.pdb
+C:\Users\rasim\source\repos\TheaterDAL\obj\Debug\netcoreapp3.1\TheaterDAL.csproj.AssemblyReference.cache
+C:\Users\rasim\source\repos\TheaterDAL\obj\Debug\netcoreapp3.1\TheaterDAL.AssemblyInfoInputs.cache
+C:\Users\rasim\source\repos\TheaterDAL\obj\Debug\netcoreapp3.1\TheaterDAL.AssemblyInfo.cs
+C:\Users\rasim\source\repos\TheaterDAL\obj\Debug\netcoreapp3.1\TheaterDAL.csproj.CoreCompileInputs.cache
+C:\Users\rasim\source\repos\TheaterDAL\obj\Debug\netcoreapp3.1\TheaterDAL.dll
+C:\Users\rasim\source\repos\TheaterDAL\obj\Debug\netcoreapp3.1\TheaterDAL.pdb
+C:\Users\rasim\source\repos\TheaterDAL\obj\Debug\netcoreapp3.1\TheaterDAL.genruntimeconfig.cache
+C:\Users\rasim\source\repos\TheaterDAL\bin\Debug\netcoreapp3.1\TheaterDAL.dll.config
+C:\Users\rasim\source\repos\TheaterDAL\obj\Debug\netcoreapp3.1\TheaterDAL.Migrations.WithPlace.resources
+C:\Users\rasim\source\repos\TheaterDAL\obj\Debug\netcoreapp3.1\TheaterDAL.csproj.GenerateResource.cache
+C:\Users\rasim\source\repos\TheaterDAL\obj\Debug\netcoreapp3.1\TheaterDAL.Migrations.ticketOwnerFix.resources

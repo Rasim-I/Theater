@@ -1,0 +1,16 @@
+C:\Users\rasim\source\repos\Theatre\bin\Debug\netcoreapp3.1\TheaterLogic.deps.json
+C:\Users\rasim\source\repos\Theatre\bin\Debug\netcoreapp3.1\TheaterLogic.dll
+C:\Users\rasim\source\repos\Theatre\bin\Debug\netcoreapp3.1\TheaterLogic.pdb
+C:\Users\rasim\source\repos\Theatre\obj\Debug\netcoreapp3.1\TheaterLogic.csproj.AssemblyReference.cache
+C:\Users\rasim\source\repos\Theatre\obj\Debug\netcoreapp3.1\TheaterLogic.AssemblyInfoInputs.cache
+C:\Users\rasim\source\repos\Theatre\obj\Debug\netcoreapp3.1\TheaterLogic.AssemblyInfo.cs
+C:\Users\rasim\source\repos\Theatre\obj\Debug\netcoreapp3.1\TheaterLogic.csproj.CoreCompileInputs.cache
+C:\Users\rasim\source\repos\Theatre\obj\Debug\netcoreapp3.1\TheaterLogic.dll
+C:\Users\rasim\source\repos\Theatre\obj\Debug\netcoreapp3.1\TheaterLogic.pdb
+C:\Users\rasim\source\repos\Theatre\bin\Debug\netcoreapp3.1\TheaterLogic.runtimeconfig.json
+C:\Users\rasim\source\repos\Theatre\bin\Debug\netcoreapp3.1\TheaterLogic.runtimeconfig.dev.json
+C:\Users\rasim\source\repos\Theatre\bin\Debug\netcoreapp3.1\TheaterDAL.dll
+C:\Users\rasim\source\repos\Theatre\bin\Debug\netcoreapp3.1\TheaterDAL.pdb
+C:\Users\rasim\source\repos\Theatre\bin\Debug\netcoreapp3.1\TheaterDAL.dll.config
+C:\Users\rasim\source\repos\Theatre\obj\Debug\netcoreapp3.1\TheaterLogic.csproj.CopyComplete
+C:\Users\rasim\source\repos\Theatre\obj\Debug\netcoreapp3.1\TheaterLogic.genruntimeconfig.cache

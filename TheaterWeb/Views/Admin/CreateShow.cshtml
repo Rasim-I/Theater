@@ -1,0 +1,63 @@
+﻿@using TheaterWeb.Models.Enum
+@using TheaterLogic.Models
+@model TheaterWeb.Models.CreateShowModel
+
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<head>
+    <link href="~/css/Admin.css" rel="stylesheet" />
+</head>
+
+<div class="main">
+
+
+    <div class="showOptionsBox shadow">
+
+        <div class="createShowOptions">
+            <label>Create new show:</label>
+            <form method="post">
+                <input type="text" name="Name" placeholder="Show name"><br/>
+                <label>Select show date: </label><br/>
+                <input type="date" name="ShowTime"><br/>
+                <label>Select genre</label>
+                <select name="Genre">
+                    <option value="@Genre.Comedy">Comedy</option>
+                    <option value="@Genre.Drama">Drama</option>
+                    <option value="@Genre.Parody">Parody</option>
+                </select><br/>
+                
+                <label>Author:</label><br/>
+                <select name="AuthorId">
+                    @foreach (Author author in ViewBag.Authors)
+                    {
+                        <option value="@author.Id">@author.Name @author.Surname</option>
+                    }
+                </select><br/>
+
+                <label class="createTickets">Add tickets:</label><br/>
+                <input type="number" name="VipTicketQuantity" placeholder="Vip tickets quantity"><br/>
+                <input type="number" name="CommonTicketQuantity" placeholder="Common tickets quantity"><br/>
+                <input type="number" name="BudgetTicketQuantity" placeholder="Budget tickets quantity"><br/><br/>
+
+                <input type="submit" class="btn-primary">
+            </form>
+        </div>
+
+
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
